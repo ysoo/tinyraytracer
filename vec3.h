@@ -1,3 +1,6 @@
+#ifndef VEC3_H
+#define VEC3_H
+
 class vec3 {
     public:
         float x, y, z;
@@ -8,10 +11,15 @@ class vec3 {
         // Add other vector operations as needed (e.g., addition, subtraction, dot product, cross product)
 
         // scalar multiplication
-        vec3 operator*(const double t) const {
-            return vec3(x * t, y * t, z * t);
+        vec3 operator*(const double scalar) const {
+            return vec3(x * scalar, y * scalar, z * scalar);
         }
-        
+
+        // scalar division
+        vec3 operator/(const double scalar) const {
+            return vec3(x / scalar, y / scalar, z / scalar);
+        }
+
         // multiplication
         vec3 operator*(const vec3& other) const {
             return vec3(x * other.x, y * other.y, z * other.z);
@@ -26,4 +34,21 @@ class vec3 {
         vec3 operator-(const vec3& other) const {
             return vec3(x - other.x, y - other.y, z - other.z);
         }
+
+        float length() const {
+            float length_squared = (x*x) + (y*y) + (z*z);
+            return sqrt(length_squared);
+        }
 };
+
+typedef vec3 point3; 
+
+inline vec3 operator*(double scaler, const vec3 &vector) {
+    return vector*scaler;
+}
+
+inline vec3 unit_vector(vec3 vector) {
+    return vector/vector.length();
+}
+
+#endif
