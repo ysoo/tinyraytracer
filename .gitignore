@@ -1,0 +1,12 @@
+.vscode
+*.ppm
+
+
+# Ignore Unix executable files
+*~
+*.out
+*.app
+*.bin
+*.o
+*.so
+*.a
