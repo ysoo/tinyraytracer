@@ -1,9 +1,12 @@
+#ifndef COLOR_H
+#define COLOR_H
+
 #include "vec3.h"
 #include <iostream>
 
 typedef vec3 color; // creating an alias for vec3
 
-bool print_flag = false;
+bool print_flag = true;
 
 void write_color(std::ostream &ofs, color pixel_color) {
     // Convert the color components to integer values in the range [0, 255].
@@ -21,3 +24,5 @@ void write_color(std::ostream &ofs, color pixel_color) {
         std::cout << ir << " " << ig << " " << ib << std::endl;
     }
 }
+
+#endif
