@@ -8,6 +8,8 @@
  * P is a 3D position along a line in 3D
  * A is the ray origin and b is the ray direction
 */
+#ifndef RAY_H
+#define RAY_H
 
 #include "vec3.h"
 
@@ -24,3 +26,5 @@ class ray {
             return origin + direction * t;
         }  
 };
+
+#endif
