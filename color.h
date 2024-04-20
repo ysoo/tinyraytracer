@@ -6,7 +6,7 @@
 
 typedef vec3 color; // creating an alias for vec3
 
-bool print_flag = true;
+bool print_flag = false;
 
 void write_color(std::ostream &ofs, color pixel_color) {
     // Convert the color components to integer values in the range [0, 255].

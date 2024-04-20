@@ -19,7 +19,7 @@ int main() {
 
     cam.aspect_ratio = 16.0 / 9.0;
     cam.image_width  = 400;
-    std::cout << "hello" << std::endl;
+
     cam.render(world);
     return 0;
 }

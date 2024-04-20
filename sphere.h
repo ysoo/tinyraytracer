@@ -11,7 +11,7 @@ class sphere : public hittable {
         double radius;
 
         sphere(point3 _center, double _radius) : center(_center), radius(_radius) {}
-        
+
         // To calculate whether or not we hit a sphere, we take the roots of 
         // x^2 + y^2 + z^2 = r^2
         // and we determine if it's > or < than 0
@@ -31,7 +31,7 @@ class sphere : public hittable {
                 root = (-b + sqrt(discriminant) ) / (2.0*a);
                 if (root <= ray_tmin || ray_tmax <= root)
                     return false;
-        }
+            }
         
             rec.t = root;
             rec.p = r.at(rec.t);
