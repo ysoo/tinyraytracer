@@ -1,10 +1,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "color.h"
+#include "utilities.h"
 #include "hittable_list.h"
-#include "vec3.h"
-#include <iostream>
 #include <fstream>
 
 class camera {
@@ -12,13 +10,13 @@ class camera {
         float aspect_ratio = 4.0/3.0;
         int image_width = 400;
         // const int image_height = 256;
-        float focal_length = 0.5;
+        float focal_length = 1.0;
         float viewport_height = 2.0;
 
-        double vfov = 90; // vertical view angle (field of view)
-        point3 lookfrom = point3(0, 0, -1);
-        point3 lookat = point3(0, 0, 0); 
-        vec3 vup = vec3(0, 1, 0); // Camera "up" direction
+        // double vfov = 90; // vertical view angle (field of view)
+        // point3 lookfrom = point3(0, 0, -1);
+        // point3 lookat = point3(0, 0, 0); 
+        // vec3 vup = vec3(0, 1, 0); // Camera "up" direction
 
         camera() {
             initialize();
@@ -68,13 +66,14 @@ class camera {
         void initialize() {
             image_height = get_image_height();
 
-            point3 camera_center = lookfrom;
+            // point3 camera_center = lookfrom;
 
-            // Determine viewport dimensions
-            focal_length = (lookfrom - lookat).length();
-            float theta = degrees_to_radians(vfov);
-            float h = tan(theta/2);
-            float viewport_height = 2 * h * focal_length;
+            // // Determine viewport dimensions
+            // focal_length = (lookfrom - lookat).length();
+            // float theta = degrees_to_radians(vfov);
+            // float h = tan(theta/2);
+            // float viewport_height = 2 * h * focal_length;
+            point3 camera_center = point3(0, 0, 0);
             float viewport_width = viewport_height * (static_cast<double>(image_width/image_height));
 
             vec3 viewport_u = vec3(viewport_width, 0, 0);
@@ -96,16 +95,12 @@ class camera {
         // blendedValue = (1 - a) * startValue + a * endValue
         color ray_color(const ray& r, const hittable_list& world) const {
             hit_record rec;
-            if(world.hit(r, 0, INFINITY, rec)) {
+            if(world.hit(r, interval(0, infinity), rec)) {
                 return 0.5 * (rec.normal + color(1, 1, 1));
             }
             vec3 unit_direction =  unit_vector(r.direction);
             float a = 0.5*(unit_direction.y + 1.0);
             return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
-        }
-
-        float degrees_to_radians(float degrees) {
-            return degrees * (M_PI / 180);
         }
 };  
 

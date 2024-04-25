@@ -2,8 +2,7 @@
 #define SPHERE_H
 
 #include "hittable.h"
-#include "vec3.h"
-#include <cmath>
+#include "utilities.h"
 
 class sphere : public hittable {
     public:
@@ -15,7 +14,7 @@ class sphere : public hittable {
         // To calculate whether or not we hit a sphere, we take the roots of 
         // x^2 + y^2 + z^2 = r^2
         // and we determine if it's > or < than 0
-        bool hit(const ray& r, double ray_tmin, double ray_tmax, hit_record& rec) const override {
+        bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
             vec3 oc = r.origin - center;
             float a = dot(r.direction, r.direction);
             float b = 2.0 * dot(r.direction, oc);
@@ -27,16 +26,16 @@ class sphere : public hittable {
             } 
 
             float root = (-b - sqrt(discriminant) ) / (2.0*a); // returning t
-            if (root <= ray_tmin || ray_tmax <= root) {
+            if (root <= ray_t.min || ray_t.max <= root) {
                 root = (-b + sqrt(discriminant) ) / (2.0*a);
-                if (root <= ray_tmin || ray_tmax <= root)
+                if (root <= ray_t.min || ray_t.max <= root)
                     return false;
             }
         
             rec.t = root;
             rec.p = r.at(rec.t);
-            rec.normal = (rec.p - center) / radius;
-
+            rec.set_face_normal(r, (rec.p - center) / radius);
+    
             return true;
         }   
 };

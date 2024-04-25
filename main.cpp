@@ -1,6 +1,5 @@
 
-#include "color.h"
-#include "ray.h"
+#include "utilities.h"
 #include "sphere.h"
 #include "hittable_list.h"
 #include "camera.h"
