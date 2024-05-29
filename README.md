@@ -27,7 +27,12 @@ Calling `camera.render(world)` where world is a hittable_list would create the i
 
 ### TODO (As of 11/19/2023)
 1. More color options and ability to vary color.
-2. Adding more intersectable objects, ray-plane, ray-box, and ray-disk
+2. Adding more intersectable objects, ray-plane, ray-box, and ray-disk - Quadrilaterals
 3. Positionable Camera
-4. Diffuse Materials/Lights
+4. Diffuse Materials/Lights - Matte
 5. Motion Blur (Moving Objects) 
+6. Different Sources of Lights
+7. Volumetric Rendering
+8. Transforms - Rotating and Placing objects
+9. Bounding Volume Hierarchies
+10. Antialiasing
